@@ -574,11 +574,12 @@ const ProfileCard = () => {
             <p className="text-xs sm:text-sm mb-2">adityakaranwal@gmail.com</p>
 
             <p className="text-sm sm:text-base lg:text-lg leading-relaxed mb-4">
-              Developed responsive web applications for a social travel platform
-              serving 310K+ active travelers Built core user features including
-              group management interface, trip booking system with location
-              selection and date filtering, and Instagram-style photo feed
-              display.
+              Hey there! I’m Aditya Karanwal, a 3rd-year CSE student who loves
+              building projects and diving into hackathons that push creativity
+              and problem-solving. I have a deep appreciation for typography and
+              design, and I’m always drawn to things that blend tech with
+              aesthetics. Beyond the screen, you’ll often find me trekking
+              through trails, watching Formula 1, or unwinding with some anime.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 lg:gap-4">
@@ -596,6 +597,7 @@ const ProfileCard = () => {
   );
 };
 // Work Experience Card Component
+// Work Experience Card Component
 const WorkExperienceCard = () => {
   return (
     <div className="border-2 border-black bg-[#F8F8F8] p-3 sm:p-4">
@@ -612,18 +614,21 @@ const WorkExperienceCard = () => {
             Frontend Developer
           </h3>
           <p className="text-sm sm:text-base text-gray-600">@Travel Buddy</p>
+          <p className="text-xs sm:text-sm text-gray-500 mt-1 font-medium">
+            May - July 2025
+          </p>
         </div>
         <button className="p-2 hover:bg-gray-100 flex-shrink-0">
           <Edit2 size={18} />
         </button>
       </div>
-
       <p className="text-sm sm:text-base leading-relaxed">
-        Developed responsive web applications using HTML, CSS, and JavaScript
-        for a social travel platform serving 310K+ active travelers. Built core
-        user features including group management interface, trip booking system
-        with location selection and date filtering, and Instagram-style photo
-        feed display.
+        While at Travel Buddy as a 2-month intern, I was actively involved in
+        building a social travel platform that connected over 310K+ active
+        travelers. I worked on crafting core user experiences — from a smooth
+        group management interface and intuitive trip booking flow with smart
+        filters, to an Instagram-style visual feed that brought every journey to
+        life.
       </p>
     </div>
   );
