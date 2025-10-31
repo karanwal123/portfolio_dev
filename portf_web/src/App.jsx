@@ -34,6 +34,8 @@ import tbdLogo from "./assets/tbd_logo.png";
 import carens_chopped from "./assets/carens_chopped.png";
 import BooksPage from "./components/BooksPage";
 import lnm from "./assets/lnm.png";
+import { ExternalLink } from "lucide-react";
+
 // Main App Component with Routing Logic
 const App = () => {
   const [currentRoute, setCurrentRoute] = useState("/");
@@ -257,7 +259,7 @@ const HomePage = () => {
           <div className="w-80 bg-[#c0c0c0] border-t-2 border-l-2 border-r-2 border-b-2 border-t-white border-l-white border-r-black border-b-black shadow-[4px_4px_0_0_#000]">
             {/* Title Bar */}
             <div className="bg-[#000080] px-2 py-1 flex items-center justify-between text-white cursor-move">
-              <span className="text-sm select-none">Purrr</span>
+              <span className="text-sm select-none">BRUHHH</span>
               <button
                 onClick={() => setShowTipWindow(false)}
                 className="px-2 bg-[#c0c0c0] text-black border border-black hover:bg-[#ddd] active:bg-[#aaa]"
@@ -610,17 +612,24 @@ const WorkExperienceCard = () => {
           />
         </div>
         <div className="flex-1">
-          <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-1">
+          <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-0.5">
             Frontend Developer
           </h3>
-          <p className="text-sm sm:text-base text-gray-600">@Travel Buddy</p>
-          <p className="text-xs sm:text-sm text-gray-500 mt-1 font-medium">
+          <p className="text-sm sm:text-base text-gray-600 mb-0.5">
+            Travel Buddy
+          </p>
+          <p className="text-xs sm:text-sm text-gray-500 font-normal">
             May - July 2025
           </p>
         </div>
-        <button className="p-2 hover:bg-gray-100 flex-shrink-0">
-          <Edit2 size={18} />
-        </button>
+        <a
+          href="https://beatravelbuddy.com/community" // your URL here
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-2 hover:bg-gray-100 flex-shrink-0 inline-flex"
+        >
+          <ExternalLink size={18} />
+        </a>
       </div>
       <p className="text-sm sm:text-base leading-relaxed">
         While at Travel Buddy as a 2-month intern, I was actively involved in
@@ -650,7 +659,9 @@ const EducationCard = () => {
           <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-1">
             Computer Science Engineering
           </h3>
-          <p className="text-sm sm:text-base text-gray-600">@University Name</p>
+          <p className="text-sm sm:text-base text-gray-600">
+            @LNM Institute of Information Technology
+          </p>
         </div>
         <button className="p-2 hover:bg-gray-100 flex-shrink-0">
           <Edit2 size={18} />
