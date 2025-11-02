@@ -9,6 +9,7 @@ html {
 
 body {
   overflow-x: hidden;
+  font-family: "TT Firs Neue", sans-serif;
 }
 
 /* Ensure proper touch scrolling on mobile */
@@ -68,4 +69,69 @@ body {
   font-weight: 400;
   font-style: italic;
   font-display: swap;
+}
+
+/* Retro Mac/XP Scrollbar */
+.retro-scrollbar::-webkit-scrollbar {
+  width: 17px;
+  background: #C0C0C0;
+}
+
+.retro-scrollbar::-webkit-scrollbar-track {
+  background: #C0C0C0;
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+}
+
+.retro-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(to right, #E8E8E8 0%, #D8D8D8 2px, #C8C8C8 50%, #B8B8B8 98%, #A8A8A8 100%);
+  border: 1px solid #000;
+  border-top: 1px solid #FFF;
+  border-left: 1px solid #FFF;
+  min-height: 20px;
+}
+
+.retro-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to right, #D8D8D8 0%, #C8C8C8 2px, #B8B8B8 50%, #A8A8A8 98%, #989898 100%);
+}
+
+.retro-scrollbar::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(to right, #C8C8C8 0%, #B8B8B8 2px, #A8A8A8 50%, #989898 98%, #888888 100%);
+}
+
+.retro-scrollbar::-webkit-scrollbar-button {
+  background: repeating-linear-gradient(180deg, #C0C0C0 0px, #C0C0C0 1px, #B8B8B8 1px, #B8B8B8 2px);
+  border: 1px solid #000;
+  height: 17px;
+  width: 17px;
+}
+
+.retro-scrollbar::-webkit-scrollbar-button:vertical:start:decrement {
+  border-bottom: 1px solid #000;
+  background-image: 
+    repeating-linear-gradient(180deg, #C0C0C0 0px, #C0C0C0 1px, #B8B8B8 1px, #B8B8B8 2px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpolygon points='5,2 2,5 8,5' fill='%23000'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%, 8px 8px;
+}
+
+.retro-scrollbar::-webkit-scrollbar-button:vertical:end:increment {
+  border-top: 1px solid #000;
+  background-image: 
+    repeating-linear-gradient(180deg, #C0C0C0 0px, #C0C0C0 1px, #B8B8B8 1px, #B8B8B8 2px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpolygon points='5,8 2,5 8,5' fill='%23000'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%, 8px 8px;
+}
+
+.retro-scrollbar::-webkit-scrollbar-button:hover {
+  background-color: #B8B8B8;
+}
+
+/* Firefox Scrollbar */
+.retro-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #C0C0C0 #808080;
 }

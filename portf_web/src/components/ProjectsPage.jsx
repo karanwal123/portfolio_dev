@@ -1,105 +1,231 @@
-import React from "react";
-import { Github, Map, Sprout, Link2, Layers } from "lucide-react"; // ✅ Added relevant icons
-
-// ✅ Import images
-import portf_plan_it from "../assets/portf_plan_it.png";
+import React, { useState } from "react";
+import { Github, ExternalLink } from "lucide-react";
 
 const ProjectsPage = () => {
+  const [selectedProject, setSelectedProject] = useState(null);
+
   const projects = [
     {
       name: "Plan-it",
       subtitle: "Personal Project",
       description:
-        "Smart multi-stop route planner featured on Google Maps Platform Awards 2025, using Google Maps API and custom TSP heuristics (2-opt/simulated annealing) to optimize unlimited waypoints. Implemented Google OAuth/JWT authentication, interactive maps, real-time metrics, weather integration, and PDF exports. Technologies: React.js, Node.js, Express.js, MongoDB, Google Maps API, TailwindCSS.",
+        "Smart multi-stop route planner featured on Google Maps Platform Awards 2025, using Google Maps API and custom TSP heuristics (2-opt/simulated annealing) to optimize unlimited waypoints. Implemented Google OAuth/JWT authentication, interactive maps, real-time metrics, weather integration, and PDF exports.",
       github: "https://github.com/karanwal123/plan-it-clean",
-      image: portf_plan_it,
-      icon: <Map size={22} />, // 🗺️ Map icon fits best
+      color: "bg-[#FFE7A0]",
+      date: "11/02/25",
+      type: "Personal Project",
+      technologies: ["React JS", "Google Maps API", "Node.js", "JWT", "TSP"],
     },
     {
       name: "KisanMitra",
       subtitle: "Capital One Launchpad",
       description:
-        "Next-generation multilingual AI assistant empowering Indian farmers with context-aware intelligence powered by Google Gemini Pro, LangChain, and FastAPI. Designed a dual-memory system blending real-time context with persistent personalization, integrated RAG search via FAISS, and orchestrated modular tools for weather, crop diagnostics, and market insights. This project was selected from 4000+ submissions for Capital One Launchpad in Bangalore, showcasing its innovation and impact.",
+        "Next-generation multilingual AI assistant empowering Indian farmers with context-aware intelligence powered by Google Gemini Pro, LangChain, and FastAPI. Designed a dual-memory system blending real-time context with persistent personalization, integrated RAG search via FAISS, and orchestrated modular tools for weather, crop diagnostics, and market insights.",
       github: "https://github.com/yourusername/project2",
-      image: portf_plan_it,
-      icon: <Sprout size={22} />, // 🌱 Agriculture theme
+      color: "bg-[#E8F4FD]",
+      date: "08/15/24",
+      type: "Capital One Launchpad",
+      technologies: [
+        "Python",
+        "FastAPI",
+        "LangChain",
+        "Google Gemini Pro",
+        "FAISS",
+      ],
     },
     {
       name: "Shrinkify",
-      subtitle: "@Startup Inc",
+      subtitle: "Personal Project",
       description:
-        "URL shortening service with custom slug support and integrated click analytics. The system includes secure authentication using JWT tokens and bcrypt password hashing, alongside a responsive web app with real-time validation and error handling. A RESTful API with protected routes and comprehensive error management was implemented, with Redux Toolkit and async thunks for efficient state management.",
+        "URL shortening service with custom slug support and integrated click analytics. The system includes secure authentication using JWT tokens and bcrypt password hashing, alongside a responsive web app with real-time validation and error handling. A RESTful API with protected routes and comprehensive error management was implemented.",
       github: "https://github.com/yourusername/project3",
-      image: portf_plan_it,
-      icon: <Link2 size={22} />, // 🔗 URL shortener
+      color: "bg-[#F3D1FF]",
+      date: "05/20/24",
+      type: "Personal Project",
+      technologies: ["React JS", "Node.js", "MongoDB", "JWT", "Express"],
     },
     {
-      name: "Project Four",
-      subtitle: "@Tech Solutions",
+      name: "Free3Lance",
+      subtitle: "Hackathon Project",
       description:
-        "A brief description of project four. Explain the key features and technologies used in the project. Implemented with cutting-edge technology stack.",
+        "Freelance marketplace platform connecting clients with skilled professionals. Built with modern web technologies featuring real-time messaging, secure payment integration, project management tools, and user rating systems.",
       github: "https://github.com/yourusername/project4",
-      image: portf_plan_it,
-      icon: <Layers size={22} />, // 🧩 General tech layers
+      color: "bg-[#BDD7FF]",
+      date: "03/10/24",
+      type: "Hackathon Project",
+      technologies: [
+        "React JS",
+        "Socket.io",
+        "Stripe",
+        "PostgreSQL",
+        "Node.js",
+      ],
     },
   ];
 
   return (
-    <div className="min-h-screen bg-[#F5E6D3] p-4 sm:p-6 lg:p-8">
-      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8">
-        Projects
-      </h1>
+    <div className="min-h-screen">
+      {/* Header */}
+      <div className="mb-6">
+        <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2">
+          Projects
+        </h1>
+        <p className="text-sm sm:text-base text-gray-600">
+          A collection of projects I've built
+        </p>
+      </div>
 
-      <div className="space-y-4 sm:space-y-6">
+      {/* Projects Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-6">
         {projects.map((project, index) => (
           <div
             key={index}
-            className="bg-[#ECF1FF] border-2 sm:border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] sm:hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-200"
+            className={`flex flex-col border-2 border-black ${project.color} p-3 lg:p-4 cursor-pointer hover:shadow-lg transition-shadow`}
+            onClick={() => setSelectedProject(project)}
           >
-            <div className="flex flex-col md:flex-row">
-              {/* Left side - Text content */}
-              <div className="w-full md:w-2/5 p-4 sm:p-6 border-b-2 sm:border-b-4 md:border-b-0 md:border-r-2 sm:md:border-r-4 border-black">
-                <div className="flex items-start gap-2 sm:gap-3 mb-3 sm:mb-4">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-black bg-white flex items-center justify-center flex-shrink-0">
-                    {project.icon}
-                  </div>
-                  <div>
-                    <h2 className="text-lg sm:text-xl font-bold">
-                      {project.name}
-                    </h2>
-                    <p className="text-xs sm:text-sm text-gray-600">
-                      {project.subtitle}
-                    </p>
-                  </div>
-                </div>
-
-                <p className="text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4">
-                  {project.description}
+            <div className="flex items-start justify-between mb-3">
+              <div className="flex-1">
+                <h2 className="text-lg sm:text-xl lg:text-2xl font-bold mb-1">
+                  {project.name}
+                </h2>
+                <p className="text-sm sm:text-base text-gray-600 mb-2">
+                  {project.subtitle}
                 </p>
-
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-gray-600 hover:text-black transition-colors"
-                >
-                  <Github size={16} className="sm:w-[18px] sm:h-[18px]" />
-                  <span className="text-sm font-medium">View Code</span>
-                </a>
               </div>
+              <ExternalLink
+                size={18}
+                className="flex-shrink-0 text-gray-600 hover:text-black transition-colors"
+              />
+            </div>
 
-              {/* Right side - Image */}
-              <div className="w-full md:w-3/5 h-48 sm:h-64 md:h-auto min-h-[250px] md:min-h-[300px] relative overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  className="w-full h-full object-cover"
-                />
+            {/* Small Tags */}
+            <div className="flex flex-wrap gap-2 mb-3">
+              <div className="px-2 py-0.5 text-[10px] sm:text-xs border border-black bg-white whitespace-nowrap">
+                Date: {project.date}
+              </div>
+              <div className="px-2 py-0.5 text-[10px] sm:text-xs border border-black bg-white whitespace-nowrap">
+                Type: {project.type}
+              </div>
+              <div className="px-2 py-0.5 text-[10px] sm:text-xs border border-black bg-white">
+                Tech: {project.technologies.slice(0, 2).join(", ")}
+                {project.technologies.length > 2 &&
+                  " +" + (project.technologies.length - 2) + " more"}
               </div>
             </div>
+
+            <p className="text-sm sm:text-base leading-relaxed line-clamp-3">
+              {project.description}
+            </p>
           </div>
         ))}
       </div>
+
+      {/* Modal */}
+      {selectedProject && (
+        <>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black bg-opacity-30 z-40 animate-fadeIn"
+            onClick={() => setSelectedProject(null)}
+          />
+
+          {/* Modal Content */}
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
+            <div
+              className={`pointer-events-auto w-full max-w-2xl bg-white border-2 border-black animate-popIn max-h-[90vh] flex flex-col ${selectedProject.color}`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className="p-4 border-b-2 border-black flex-shrink-0">
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-1">
+                      {selectedProject.name}
+                    </h2>
+                    <p className="text-sm sm:text-base text-gray-600">
+                      {selectedProject.subtitle}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="p-2 hover:bg-gray-100 transition-colors flex-shrink-0"
+                  >
+                    <span className="text-xl">✕</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Modal Body */}
+              <div className="p-4 lg:p-6 flex-1 overflow-y-auto retro-scrollbar">
+                {/* Tags in Modal */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <div className="px-2 py-0.5 text-xs border border-black bg-white whitespace-nowrap">
+                    Date: {selectedProject.date}
+                  </div>
+                  <div className="px-2 py-0.5 text-xs border border-black bg-white whitespace-nowrap">
+                    Type: {selectedProject.type}
+                  </div>
+                  <div className="px-2 py-0.5 text-xs border border-black bg-white">
+                    Tech: {selectedProject.technologies.join(", ")}
+                  </div>
+                </div>
+
+                <p className="text-sm sm:text-base leading-relaxed mb-6">
+                  {selectedProject.description}
+                </p>
+
+                {/* Action Buttons */}
+                <div className="flex gap-3 pt-4 border-t-2 border-black">
+                  <a
+                    href={selectedProject.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2 border-2 border-black bg-white hover:bg-gray-100 transition-colors"
+                  >
+                    <Github size={18} />
+                    <span className="text-sm sm:text-base font-medium">
+                      View Code
+                    </span>
+                  </a>
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="px-4 py-2 border-2 border-black bg-white hover:bg-gray-100 transition-colors text-sm sm:text-base font-medium"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Custom Styles and Animations */}
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        @keyframes popIn {
+          from {
+            opacity: 0;
+            transform: scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 0.2s ease-out;
+        }
+        
+        .animate-popIn {
+          animation: popIn 0.3s ease-out;
+        }
+      `}</style>
     </div>
   );
 };

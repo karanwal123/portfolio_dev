@@ -291,31 +291,17 @@ const HomePage = () => {
         </motion.div>
       )}
 
-      <div className="flex flex-col sm:flex-row items-center justify-between mb-2 gap-2">
-        <div className="flex gap-1">
-          <button className="p-1.5 border-2 border-black hover:bg-gray-100">
-            <ArrowLeft size={18} />
-          </button>
-          <button
-            onClick={() => setShowTipWindow(true)}
-            className="p-1.5 border-2 border-black hover:bg-gray-100 flex items-center gap-1"
-          >
-            <Lightbulb size={18} />
-            <span className="text-xs font-medium hidden sm:inline">
-              Show Tip
-            </span>
-          </button>
-        </div>
-        <div className="flex w-full sm:w-auto gap-1">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="px-2 py-1.5 border-2 border-black w-full sm:w-48 text-sm"
-          />
-          <button className="p-1.5 border-2 border-black hover:bg-gray-100">
-            <Menu size={18} />
-          </button>
-        </div>
+      <div className="flex gap-1 mb-2">
+        <button className="p-1.5 border-2 border-black hover:bg-gray-100">
+          <ArrowLeft size={18} />
+        </button>
+        <button
+          onClick={() => setShowTipWindow(true)}
+          className="p-1.5 border-2 border-black hover:bg-gray-100 flex items-center gap-1"
+        >
+          <Lightbulb size={18} />
+          <span className="text-xs font-medium hidden sm:inline">Show Tip</span>
+        </button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-6">
