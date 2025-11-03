@@ -32,6 +32,7 @@ import LoadingScreen from "./components/LoadingScreen";
 import WindowsXPFooter from "./components/Footer";
 import tbdLogo from "./assets/tbd_logo.png";
 import carens_chopped from "./assets/carens_chopped.png";
+import animatedPfp from "./assets/animated_pfp_carens.mp4";
 import BooksPage from "./components/BooksPage";
 import lnm from "./assets/lnm.png";
 import { ExternalLink } from "lucide-react";
@@ -90,7 +91,7 @@ const App = () => {
             />
             <MainContent currentRoute={currentRoute} />
           </div>
-          <WindowsXPFooter />
+          <WindowsXPFooter navigate={navigate} />
         </>
       )}
     </div>
@@ -468,6 +469,7 @@ const HomePage = () => {
 // Profile Card Component
 const ProfileCard = () => {
   const [showPicPopup, setShowPicPopup] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
 
   return (
     <>
@@ -493,12 +495,24 @@ const ProfileCard = () => {
               </button>
             </div>
             <div className="flex items-center justify-center bg-white p-4">
-              <img
-                src={carens_chopped}
-                alt="Profile large"
-                className="w-52 h-52 sm:w-64 sm:h-64 rounded object-cover aspect-square"
-                style={{ aspectRatio: "1 / 1" }}
-              />
+              {showVideo ? (
+                <video
+                  src={animatedPfp}
+                  className="w-52 h-52 sm:w-64 sm:h-64 rounded object-cover scale-110"
+                  style={{ aspectRatio: "1 / 1", objectFit: "cover" }}
+                  autoPlay
+                  muted
+                  playsInline
+                  onEnded={() => setShowVideo(false)}
+                />
+              ) : (
+                <img
+                  src={carens_chopped}
+                  alt="Profile large"
+                  className="w-52 h-52 sm:w-64 sm:h-64 rounded object-cover aspect-square"
+                  style={{ aspectRatio: "1 / 1" }}
+                />
+              )}
             </div>
           </div>
         </motion.div>
@@ -508,23 +522,38 @@ const ProfileCard = () => {
         <div className="flex flex-col sm:flex-row gap-3">
           <div
             className="flex-shrink-0 border-2 border-black mx-auto sm:mx-0 w-24 h-24 sm:w-20 sm:h-20 lg:w-24 lg:h-24 overflow-hidden cursor-pointer"
-            onClick={() => setShowPicPopup(true)}
+            onClick={() => {
+              setShowVideo((prev) => !prev);
+              setShowPicPopup(true);
+            }}
             onMouseEnter={() => setShowPicPopup(true)}
             onMouseLeave={() => setShowPicPopup(false)}
             tabIndex={0}
             aria-label="Show Profile Picture"
           >
-            <img
-              src={carens_chopped}
-              alt=""
-              className="w-full h-full object-cover aspect-square"
-              loading="eager"
-              decoding="async"
-              fetchPriority="high"
-              width="96"
-              height="96"
-              style={{ aspectRatio: "1 / 1" }}
-            />
+            {showVideo ? (
+              <video
+                src={animatedPfp}
+                className="w-full h-full object-cover scale-110"
+                style={{ aspectRatio: "1 / 1", objectFit: "cover" }}
+                autoPlay
+                muted
+                playsInline
+                onEnded={() => setShowVideo(false)}
+              />
+            ) : (
+              <img
+                src={carens_chopped}
+                alt=""
+                className="w-full h-full object-cover aspect-square"
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
+                width="96"
+                height="96"
+                style={{ aspectRatio: "1 / 1" }}
+              />
+            )}
           </div>
 
           <div className="flex-1">
@@ -585,81 +614,168 @@ const ProfileCard = () => {
   );
 };
 // Work Experience Card Component
-// Work Experience Card Component
 const WorkExperienceCard = () => {
+  const [showLogoPopup, setShowLogoPopup] = useState(false);
+
   return (
-    <div className="border-2 border-black bg-[#F8F8F8] p-3 sm:p-4">
-      <div className="flex items-center gap-4 mb-4">
-        <div className="w-16 h-16 border-2 border-black bg-white flex items-center justify-center flex-shrink-0">
-          <img
-            src={tbdLogo}
-            alt="Travel Buddy Logo"
-            className="w-full h-full object-contain"
-          />
-        </div>
-        <div className="flex-1">
-          <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-0.5">
-            Frontend Developer
-          </h3>
-          <p className="text-sm sm:text-base text-gray-600 mb-0.5">
-            Travel Buddy
-          </p>
-          <p className="text-xs sm:text-sm text-gray-500 font-normal">
-            May - July 2025
-          </p>
-        </div>
-        <a
-          href="https://beatravelbuddy.com/community" // your URL here
-          target="_blank"
-          rel="noopener noreferrer"
-          className="p-2 hover:bg-gray-100 flex-shrink-0 inline-flex"
+    <>
+      {/* Popup Logo Window */}
+      {showLogoPopup && (
+        <motion.div
+          drag
+          dragMomentum={false}
+          dragConstraints={{ left: -500, right: 500, top: -300, bottom: 300 }}
+          className="fixed top-1/2 left-1/2 z-50"
+          initial={{ scale: 0.8, opacity: 0, x: "-50%", y: "-50%" }}
+          animate={{ scale: 1, opacity: 1, x: "-50%", y: "-50%" }}
+          exit={{ scale: 0.8, opacity: 0 }}
         >
-          <ExternalLink size={18} />
-        </a>
+          <div className="w-72 sm:w-96 bg-[#c0c0c0] border-t-2 border-l-2 border-r-2 border-b-2 border-t-white border-l-white border-r-black border-b-black shadow-[4px_4px_0_0_#000]">
+            <div className="bg-[#000080] px-2 py-1 flex items-center justify-between text-white cursor-move">
+              <span className="text-xs">Travel Buddy Logo</span>
+              <button
+                onClick={() => setShowLogoPopup(false)}
+                className="px-2 bg-[#c0c0c0] text-black border border-black hover:bg-[#ddd] active:bg-[#aaa]"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="flex items-center justify-center bg-white p-4">
+              <img
+                src={tbdLogo}
+                alt="Travel Buddy Logo Large"
+                className="w-52 h-52 sm:w-64 sm:h-64 object-contain"
+              />
+            </div>
+          </div>
+        </motion.div>
+      )}
+
+      <div className="border-2 border-black bg-[#F8F8F8] p-3 sm:p-4">
+        <div className="flex items-center gap-4 mb-4">
+          <div
+            className="w-16 h-16 border-2 border-black bg-white flex items-center justify-center flex-shrink-0 cursor-pointer hover:bg-gray-100 transition-colors"
+            onClick={() => setShowLogoPopup(true)}
+            onMouseEnter={() => setShowLogoPopup(true)}
+            onMouseLeave={() => setShowLogoPopup(false)}
+            tabIndex={0}
+            aria-label="Show Travel Buddy Logo"
+          >
+            <img
+              src={tbdLogo}
+              alt="Travel Buddy Logo"
+              className="w-full h-full object-contain"
+            />
+          </div>
+          <div className="flex-1">
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-0.5">
+              Frontend Developer
+            </h3>
+            <p className="text-sm sm:text-base text-gray-600 mb-0.5">
+              Travel Buddy
+            </p>
+            <p className="text-xs sm:text-sm text-gray-500 font-normal">
+              May - July 2025
+            </p>
+          </div>
+          <a
+            href="https://beatravelbuddy.com/community"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 hover:bg-gray-100 flex-shrink-0 inline-flex"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <ExternalLink size={18} />
+          </a>
+        </div>
+        <p className="text-sm sm:text-base leading-relaxed">
+          While at Travel Buddy as a 2-month intern, I was actively involved in
+          building a social travel platform that connected over 310K+ active
+          travelers. I worked on crafting core user experiences — from a smooth
+          group management interface and intuitive trip booking flow with smart
+          filters, to an Instagram-style visual feed that brought every journey
+          to life.
+        </p>
       </div>
-      <p className="text-sm sm:text-base leading-relaxed">
-        While at Travel Buddy as a 2-month intern, I was actively involved in
-        building a social travel platform that connected over 310K+ active
-        travelers. I worked on crafting core user experiences — from a smooth
-        group management interface and intuitive trip booking flow with smart
-        filters, to an Instagram-style visual feed that brought every journey to
-        life.
-      </p>
-    </div>
+    </>
   );
 };
 
 // Education Card Component
 const EducationCard = () => {
-  return (
-    <div className="border-2 border-black bg-[#F8F8F8] p-3 sm:p-4">
-      <div className="flex items-center gap-4 mb-4">
-        <div className="w-16 h-16 border-2 border-black bg-white flex items-center justify-center flex-shrink-0">
-          <img
-            src={lnm}
-            alt="LNM Institute Logo"
-            className="w-full h-full object-contain"
-          />
-        </div>
-        <div className="flex-1">
-          <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-1">
-            Computer Science Engineering
-          </h3>
-          <p className="text-sm sm:text-base text-gray-600">
-            @LNM Institute of Information Technology
-          </p>
-        </div>
-        <button className="p-2 hover:bg-gray-100 flex-shrink-0">
-          <Edit2 size={18} />
-        </button>
-      </div>
+  const [showLogoPopup, setShowLogoPopup] = useState(false);
 
-      <p className="text-sm sm:text-base leading-relaxed">
-        Pursuing Bachelor's degree in Computer Science Engineering with focus on
-        software development, data structures, algorithms, and web technologies.
-        Active participant in coding competitions and hackathons.
-      </p>
-    </div>
+  return (
+    <>
+      {/* Popup Logo Window */}
+      {showLogoPopup && (
+        <motion.div
+          drag
+          dragMomentum={false}
+          dragConstraints={{ left: -500, right: 500, top: -300, bottom: 300 }}
+          className="fixed top-1/2 left-1/2 z-50"
+          initial={{ scale: 0.8, opacity: 0, x: "-50%", y: "-50%" }}
+          animate={{ scale: 1, opacity: 1, x: "-50%", y: "-50%" }}
+          exit={{ scale: 0.8, opacity: 0 }}
+        >
+          <div className="w-72 sm:w-96 bg-[#c0c0c0] border-t-2 border-l-2 border-r-2 border-b-2 border-t-white border-l-white border-r-black border-b-black shadow-[4px_4px_0_0_#000]">
+            <div className="bg-[#000080] px-2 py-1 flex items-center justify-between text-white cursor-move">
+              <span className="text-xs">LNM Institute Logo</span>
+              <button
+                onClick={() => setShowLogoPopup(false)}
+                className="px-2 bg-[#c0c0c0] text-black border border-black hover:bg-[#ddd] active:bg-[#aaa]"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="flex items-center justify-center bg-white p-4">
+              <img
+                src={lnm}
+                alt="LNM Institute Logo Large"
+                className="w-52 h-52 sm:w-64 sm:h-64 object-contain"
+              />
+            </div>
+          </div>
+        </motion.div>
+      )}
+
+      <div className="border-2 border-black bg-[#F8F8F8] p-3 sm:p-4">
+        <div className="flex items-center gap-4 mb-4">
+          <div
+            className="w-16 h-16 border-2 border-black bg-white flex items-center justify-center flex-shrink-0 cursor-pointer hover:bg-gray-100 transition-colors"
+            onClick={() => setShowLogoPopup(true)}
+            onMouseEnter={() => setShowLogoPopup(true)}
+            onMouseLeave={() => setShowLogoPopup(false)}
+            tabIndex={0}
+            aria-label="Show LNM Institute Logo"
+          >
+            <img
+              src={lnm}
+              alt="LNM Institute Logo"
+              className="w-full h-full object-contain"
+            />
+          </div>
+          <div className="flex-1">
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-1">
+              Computer Science Engineering
+            </h3>
+            <p className="text-sm sm:text-base text-gray-600">
+              @LNM Institute of Information Technology
+            </p>
+          </div>
+          <button className="p-2 hover:bg-gray-100 flex-shrink-0">
+            <Edit2 size={18} />
+          </button>
+        </div>
+
+        <p className="text-sm sm:text-base leading-relaxed">
+          Pursuing Bachelor's degree in Computer Science Engineering with focus
+          on software development, data structures, algorithms, and web
+          technologies. Active participant in coding competitions and
+          hackathons.
+        </p>
+      </div>
+    </>
   );
 };
 

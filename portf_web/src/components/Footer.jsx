@@ -13,7 +13,7 @@ import {
   Coffee,
 } from "lucide-react";
 
-const WindowsXPFooter = () => {
+const WindowsXPFooter = ({ navigate }) => {
   const [time, setTime] = useState(new Date());
   const [startMenuOpen, setStartMenuOpen] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
@@ -45,13 +45,20 @@ const WindowsXPFooter = () => {
   };
 
   const menuItems = [
-    { icon: Home, label: "Home", color: "bg-black" },
-    { icon: User, label: "About Me", color: "bg-gray-800" },
-    { icon: Briefcase, label: "Projects", color: "bg-black" },
-    { icon: FileText, label: "Resume", color: "bg-gray-800" },
-    { icon: Mail, label: "Contact", color: "bg-black" },
-    { icon: Coffee, label: "Buy Me Coffee", color: "bg-gray-800" },
+    { icon: Home, label: "Home", color: "bg-black", route: "/" },
+    { icon: User, label: "About Me", color: "bg-gray-800", route: "/" },
+    { icon: Briefcase, label: "Projects", color: "bg-black", route: "/projects" },
+    { icon: FileText, label: "Resume", color: "bg-gray-800", route: "/" },
+    { icon: Mail, label: "Contact", color: "bg-black", route: "/" },
+    { icon: Coffee, label: "Buy Me Coffee", color: "bg-gray-800", route: "/" },
   ];
+
+  const handleMenuClick = (route) => {
+    if (navigate && route) {
+      navigate(route);
+      setStartMenuOpen(false);
+    }
+  };
 
   return (
     <>
@@ -73,7 +80,7 @@ const WindowsXPFooter = () => {
               <button
                 key={index}
                 className={`w-full flex items-center gap-3 p-3 ${item.color} text-white hover:bg-gray-600 border-2 border-black mb-2 transition-all font-bold text-sm`}
-                onClick={() => setStartMenuOpen(false)}
+                onClick={() => handleMenuClick(item.route)}
               >
                 <item.icon size={20} className="stroke-[2.5]" />
                 <span>{item.label}</span>
