@@ -73,6 +73,34 @@ const App = () => {
     };
   }, []);
 
+  // Preload key assets on first visit
+  useEffect(() => {
+    const imageSources = [carens_chopped, tbdLogo, lnm];
+    imageSources.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+
+    // Preload video via link hint and a silent video element
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "video";
+    link.href = animatedPfp;
+    document.head.appendChild(link);
+
+    const vid = document.createElement("video");
+    vid.src = animatedPfp;
+    vid.preload = "auto";
+    vid.muted = true;
+    try {
+      vid.load();
+    } catch {}
+
+    return () => {
+      if (link.parentNode) link.parentNode.removeChild(link);
+    };
+  }, []);
+
   const navigate = (route) => {
     setCurrentRoute(route);
   };
