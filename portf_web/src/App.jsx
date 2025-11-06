@@ -34,6 +34,7 @@ import tbdLogo from "./assets/tbd_logo.png";
 import carens_chopped from "./assets/carens_chopped.png";
 import animatedPfp from "./assets/animated_pfp_carens.mp4";
 import BooksPage from "./components/BooksPage";
+import MediumArticlesPage from "./components/MediumArticlesPage";
 import lnm from "./assets/lnm.png";
 import { ExternalLink } from "lucide-react";
 
@@ -135,6 +136,7 @@ const Sidebar = ({ currentRoute, navigate, views }) => {
     { label: "Hackathons", route: "/hackathons" },
     { label: "Designs", route: "/designs" },
     { label: "Books", route: "/books" },
+    { label: "Articles", route: "/articles" },
   ];
 
   const btnRefs = navItems.map(() => useRef(null));
@@ -250,6 +252,8 @@ const MainContent = ({ currentRoute }) => {
         return <DesignsPage />;
       case "/books":
         return <BooksPage />;
+      case "/articles":
+        return <MediumArticlesPage />;
       default:
         return <HomePage />;
     }
@@ -487,6 +491,7 @@ const HomePage = () => {
           <div className="flex gap-4 sm:gap-8">
             <StatCounter label="Hackathons" value={5} suffix="+" />
             <StatCounter label="Projects" value={10} suffix="+" />
+            <StatCounter label="Events" value={4} suffix="+" />
           </div>
         </div>
       </div>
@@ -591,7 +596,7 @@ const ProfileCard = () => {
               </h2>
               <div className="flex gap-2 mt-2 sm:mt-0">
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/aditya--karanwal/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-7 h-7 sm:w-8 sm:h-8 border-2 border-black bg-white flex items-center justify-center hover:bg-gray-100"
@@ -599,7 +604,7 @@ const ProfileCard = () => {
                   <FaLinkedin size={14} className="sm:w-4 sm:h-4" />
                 </a>
                 <a
-                  href="https://leetcode.com"
+                  href="https://leetcode.com/u/aditya_karanwal/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-7 h-7 sm:w-8 sm:h-8 border-2 border-black bg-white flex items-center justify-center hover:bg-gray-100"
@@ -607,7 +612,7 @@ const ProfileCard = () => {
                   <SiLeetcode size={14} className="sm:w-4 sm:h-4" />
                 </a>
                 <a
-                  href="https://github.com"
+                  href="https://github.com/karanwal123"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-7 h-7 sm:w-8 sm:h-8 border-2 border-black bg-white flex items-center justify-center hover:bg-gray-100"
@@ -628,12 +633,22 @@ const ProfileCard = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 lg:gap-4">
-              <button className="px-3 sm:px-4 lg:px-6 py-2 bg-black text-white font-semibold hover:bg-gray-800 w-full sm:w-auto text-sm sm:text-base">
+              <a
+                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 sm:px-4 lg:px-6 py-2 bg-black text-white font-semibold hover:bg-gray-800 w-full sm:w-auto text-sm sm:text-base text-center"
+              >
                 Download Resume
-              </button>
-              <button className="px-3 sm:px-4 lg:px-6 py-2 border-2 border-black font-semibold hover:bg-gray-100 w-full sm:w-auto text-sm sm:text-base">
+              </a>
+              <a
+                href="https://dog-zone-ebf.notion.site/About-me-173c0f234b3e80688bbbfd1570fa7b41"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 sm:px-4 lg:px-6 py-2 border-2 border-black font-semibold hover:bg-gray-100 w-full sm:w-auto text-sm sm:text-base text-center"
+              >
                 Notion
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -791,9 +806,6 @@ const EducationCard = () => {
               @LNM Institute of Information Technology
             </p>
           </div>
-          <button className="p-2 hover:bg-gray-100 flex-shrink-0">
-            <Edit2 size={18} />
-          </button>
         </div>
 
         <p className="text-sm sm:text-base leading-relaxed">
