@@ -41,19 +41,9 @@ import { ExternalLink } from "lucide-react";
 // Main App Component with Routing Logic
 const App = () => {
   const [currentRoute, setCurrentRoute] = useState("/");
-  const [views, setViews] = useState(() => {
-    // Get stored views from localStorage or start from 0
-    const storedViews = localStorage.getItem("portfolioViews");
-    return storedViews ? parseInt(storedViews) : 0;
-  });
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Increment view count on component mount
-    const newViews = views + 1;
-    setViews(newViews);
-    localStorage.setItem("portfolioViews", newViews.toString());
-
     // Ensure loading screen stays for at least 5s, and longer if page isn't fully loaded yet
     let isCancelled = false;
     const minTimer = new Promise((resolve) => setTimeout(resolve, 5000));
@@ -113,11 +103,7 @@ const App = () => {
       ) : (
         <>
           <div className="flex flex-col lg:flex-row min-h-screen">
-            <Sidebar
-              currentRoute={currentRoute}
-              navigate={navigate}
-              views={views}
-            />
+            <Sidebar currentRoute={currentRoute} navigate={navigate} />
             <MainContent currentRoute={currentRoute} />
           </div>
           <WindowsXPFooter navigate={navigate} />
@@ -128,7 +114,7 @@ const App = () => {
 };
 
 // Sidebar Component
-const Sidebar = ({ currentRoute, navigate, views }) => {
+const Sidebar = ({ currentRoute, navigate }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navItems = [
     { label: "Home", route: "/" },
@@ -197,16 +183,12 @@ const Sidebar = ({ currentRoute, navigate, views }) => {
                 </button>
               ))}
             </nav>
-
-            <div className="border-2 border-black px-3 py-2 bg-white">
-              <p className="text-sm font-semibold">Views : {views}</p>
-            </div>
           </div>
         </div>
       )}
 
       {/* Desktop Sidebar */}
-      <div className="hidden lg:flex lg:w-48 p-4 flex-col justify-between h-screen">
+      <div className="hidden lg:flex lg:w-48 p-4 flex-col h-screen">
         <div>
           <div className="bg-black text-white px-3 py-2 text-base font-bold mb-8">
             PORTFOLIO
@@ -228,10 +210,6 @@ const Sidebar = ({ currentRoute, navigate, views }) => {
               </button>
             ))}
           </nav>
-        </div>
-
-        <div className="border-2 border-black px-3 py-2 bg-white">
-          <p className="text-sm font-semibold">Views : {views}</p>
         </div>
       </div>
     </>
