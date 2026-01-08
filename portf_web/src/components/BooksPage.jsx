@@ -103,7 +103,6 @@ const BooksPage = () => {
             </Shelf>
           </div>
 
-          {/* Bottom shelf: no cat here but you can enable it by passing `withCat` and a custom `catPosition` */}
           <Shelf>
             {books.slice(3).map((b) => (
               <RetroBook
@@ -122,12 +121,12 @@ const BooksPage = () => {
           <div className="absolute bottom-2 right-2 w-4 h-4 border-r-4 border-b-4 border-black"></div>
         </div>
 
-        <div
+        {/* <div
           className="mt-6 text-xs sm:text-sm font-bold text-black text-center border-2 border-black bg-yellow-200 px-4 py-2 shadow-[4px_4px_0_0_#000]"
           style={{ fontFamily: "monospace" }}
         >
           ★ {books.length} BOOKS ★ CLICK TO EXPLORE ★
-        </div>
+        </div> */}
       </div>
     </div>
   );
