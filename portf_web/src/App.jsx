@@ -238,7 +238,7 @@ const MainContent = ({ currentRoute }) => {
   };
 
   return (
-    <div className="flex-1 p-2 lg:p-4 border-2 border-black m-1 lg:m-2 bg-[#FFF6E5] overflow-y-auto min-h-screen lg:min-h-0 lg:h-screen">
+    <div className="flex-1 p-2 lg:p-4 border-2 border-black m-1 lg:m-2 bg-[#FFF6E5] overflow-y-auto retro-scrollbar min-h-screen lg:min-h-0 lg:h-screen">
       {renderRoute()}
     </div>
   );
@@ -827,14 +827,96 @@ const StatCounter = ({ label, value, suffix }) => {
 // Import Pages
 import ProjectsPage from "./components/ProjectsPage";
 
-const HackathonsPage = () => (
-  <div>
-    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold">Hackathons</h1>
-    <p className="mt-4 text-sm sm:text-base lg:text-lg">
-      Hackathon achievements go here...
-    </p>
-  </div>
-);
+const HackathonsPage = () => {
+  const hackathons = [
+    {
+      name: "ShikshaLokam Hackathon",
+      achievement: "Winner",
+      description:
+        "Emerged as the winner of this national-level hackathon among 2,897+ registrations.",
+      color: "bg-[#FFE7A0]",
+      participants: "2,897+ registrations",
+    },
+    {
+      name: "Capital One Launchpad 2025",
+      achievement: "Finalist (Top 14)",
+      description:
+        "Out of 4000+ teams (5073 participants), our team was selected among the Top 14 Finalists at the Capital One Launchpad, Bangalore.",
+      color: "bg-[#E8F4FD]",
+      participants: "5,073 participants",
+    },
+    {
+      name: "Open Gateway Hackathon (IMC'25)",
+      achievement: "Finalist (Top 10)",
+      description:
+        "Selected among top 10 teams out of 2345 participants for the prestigious Open Gateway Hackathon powered by GSMA and Nokia.",
+      color: "bg-[#F3D1FF]",
+      participants: "2,345 participants",
+    },
+    {
+      name: "Hackstreet 3.0 (2025)",
+      achievement: "1st Place",
+      description:
+        "Secured 1st Place with team in hackathon organized by IEEE at JIIT Noida.",
+      color: "bg-[#BDD7FF]",
+      participants: "IEEE JIIT Noida",
+    },
+    {
+      name: "HackJKLU v4.0 (2025)",
+      achievement: "4th Place",
+      description:
+        "Secured 4th Place with team in a hackathon organized by JK Lakshmipat University, Jaipur, competing against 180+ teams.",
+      color: "bg-[#FFF3CD]",
+      participants: "180+ teams",
+    },
+  ];
+
+  return (
+    <div className="min-h-screen">
+      {/* Header */}
+      <div className="mb-6">
+        <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2">
+          Hackathons
+        </h1>
+        <p className="text-sm sm:text-base text-gray-600">
+          My hackathon achievements and competitions
+        </p>
+      </div>
+
+      {/* Hackathons Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-6">
+        {hackathons.map((hackathon, index) => (
+          <div
+            key={index}
+            className={`flex flex-col border-2 border-black ${hackathon.color} p-3 lg:p-4`}
+          >
+            <div className="flex items-start justify-between mb-3">
+              <div className="flex-1">
+                <h2 className="text-lg sm:text-xl lg:text-2xl font-bold mb-1">
+                  {hackathon.name}
+                </h2>
+                <p className="text-sm sm:text-base font-semibold text-gray-800 mb-2">
+                  {hackathon.achievement}
+                </p>
+              </div>
+            </div>
+
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2 mb-3">
+              <div className="px-2 py-0.5 text-[10px] sm:text-xs border border-black bg-white whitespace-nowrap">
+                Participants: {hackathon.participants}
+              </div>
+            </div>
+
+            <p className="text-sm sm:text-base leading-relaxed">
+              {hackathon.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const DesignsPage = () => (
   <div>
