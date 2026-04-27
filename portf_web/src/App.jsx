@@ -85,7 +85,7 @@ const App = () => {
     vid.muted = true;
     try {
       vid.load();
-    } catch {}
+    } catch { }
 
     return () => {
       if (link.parentNode) link.parentNode.removeChild(link);
@@ -173,11 +173,10 @@ const Sidebar = ({ currentRoute, navigate }) => {
                   key={item.route}
                   ref={btnRefs[idx]}
                   onClick={() => handleNavClick(item.route, idx)}
-                  className={`w-full text-left px-4 py-2 text-sm font-semibold transition-colors ${
-                    currentRoute === item.route
-                      ? "bg-black text-white"
-                      : "hover:bg-black hover:text-white"
-                  }`}
+                  className={`w-full text-left px-4 py-2 text-sm font-semibold transition-colors ${currentRoute === item.route
+                    ? "bg-black text-white"
+                    : "hover:bg-black hover:text-white"
+                    }`}
                 >
                   {item.label}
                 </button>
@@ -200,11 +199,10 @@ const Sidebar = ({ currentRoute, navigate }) => {
                 key={item.route}
                 ref={btnRefs[idx]}
                 onClick={() => handleNavClick(item.route, idx)}
-                className={`w-full text-left px-4 py-2 text-sm font-semibold transition-colors ${
-                  currentRoute === item.route
-                    ? "bg-black text-white"
-                    : "hover:bg-black hover:text-white"
-                }`}
+                className={`w-full text-left px-4 py-2 text-sm font-semibold transition-colors ${currentRoute === item.route
+                  ? "bg-black text-white"
+                  : "hover:bg-black hover:text-white"
+                  }`}
               >
                 {item.label}
               </button>
@@ -838,6 +836,14 @@ const HackathonsPage = () => {
       participants: "2,897+ registrations",
     },
     {
+      name: "HackJKLU v5.0 (2026)",
+      achievement: "Winner",
+      description:
+        "Emerged as the winner of this hackathon among 2,897+ registrations.",
+      color: "bg-[#CFEBDF]",
+      participants: "1000+ Participants",
+    },
+    {
       name: "Capital One Launchpad 2025",
       achievement: "Finalist (Top 14)",
       description:
@@ -918,13 +924,39 @@ const HackathonsPage = () => {
   );
 };
 
-const DesignsPage = () => (
-  <div>
-    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold">Designs</h1>
-    <p className="mt-4 text-sm sm:text-base lg:text-lg">
-      Design portfolio goes here...
-    </p>
-  </div>
-);
+const DesignsPage = () => {
+  const designPortfolioUrl = "https://possible-grasshopper.super.site/";
+
+  return (
+    <div className="min-h-screen">
+      <div className="mb-6">
+        <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2">Designs</h1>
+        <p className="text-sm sm:text-base text-gray-600">
+          Wohoooooo
+        </p>
+      </div>
+
+      <div className="border-2 border-black bg-white p-2 sm:p-3">
+        <iframe
+          src={designPortfolioUrl}
+          title="Aditya design portfolio"
+          className="w-full h-[68vh] sm:h-[74vh] lg:h-[80vh] border-2 border-black bg-white"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+        <div className="mt-3 flex justify-end">
+          <a
+            href={designPortfolioUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-3 py-2 border-2 border-black bg-white font-semibold hover:bg-gray-100 text-xs sm:text-sm"
+          >
+            Open in New Tab
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default App;
