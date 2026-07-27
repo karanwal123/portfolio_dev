@@ -46,10 +46,13 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Ensure loading screen stays for at least 5s, and longer if page isn't fully loaded yet
     let isCancelled = false;
+
+    // Minimum display time for the loading screen
     const minTimer = new Promise((resolve) => setTimeout(resolve, 5000));
-    const loadPromise = new Promise((resolve) => {
+
+    // Wait for the document to be fully parsed
+    const domReady = new Promise((resolve) => {
       if (document.readyState === "complete") {
         resolve();
       } else {
@@ -57,40 +60,47 @@ const App = () => {
       }
     });
 
-    Promise.all([minTimer, loadPromise]).then(() => {
+    // Preload every image — returns a promise that resolves when cached
+    const preloadImage = (src) =>
+      new Promise((resolve) => {
+        const img = new Image();
+        img.onload = resolve;
+        img.onerror = resolve; // don't block on failure
+        img.src = src;
+      });
+
+    // Preload a video — resolves once enough data is buffered to play
+    const preloadVideo = (src) =>
+      new Promise((resolve) => {
+        const vid = document.createElement("video");
+        vid.preload = "auto";
+        vid.muted = true;
+        vid.playsInline = true;
+        vid.oncanplaythrough = resolve;
+        vid.onerror = resolve;
+        vid.src = src;
+        try { vid.load(); } catch { resolve(); }
+        // Safety timeout so a slow video doesn't hold the loader forever
+        setTimeout(resolve, 8000);
+      });
+
+    // All assets that should be warm before the loader drops
+    const imageAssets = [carens_chopped, tbdLogo, lnm, shikshaLogo];
+    const videoAssets = [animatedPfp, delhiMetroVideo];
+
+    const allReady = Promise.all([
+      minTimer,
+      domReady,
+      ...imageAssets.map(preloadImage),
+      ...videoAssets.map(preloadVideo),
+    ]);
+
+    allReady.then(() => {
       if (!isCancelled) setIsLoading(false);
     });
 
     return () => {
       isCancelled = true;
-    };
-  }, []);
-
-  // Preload key assets on first visit
-  useEffect(() => {
-    const imageSources = [carens_chopped, tbdLogo, lnm];
-    imageSources.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-
-    // Preload video via link hint and a silent video element
-    const link = document.createElement("link");
-    link.rel = "preload";
-    link.as = "video";
-    link.href = animatedPfp;
-    document.head.appendChild(link);
-
-    const vid = document.createElement("video");
-    vid.src = animatedPfp;
-    vid.preload = "auto";
-    vid.muted = true;
-    try {
-      vid.load();
-    } catch { }
-
-    return () => {
-      if (link.parentNode) link.parentNode.removeChild(link);
     };
   }, []);
 
@@ -270,7 +280,7 @@ const HomePage = () => {
           <div className="w-80 bg-[#c0c0c0] border-t-2 border-l-2 border-r-2 border-b-2 border-t-white border-l-white border-r-black border-b-black shadow-[4px_4px_0_0_#000]">
             {/* Title Bar */}
             <div className="bg-[#000080] px-2 py-1 flex items-center justify-between text-white cursor-move">
-              <span className="text-sm select-none">BRUHHH</span>
+              <span className="text-sm select-none">Ssup Twin</span>
               <button
                 onClick={() => setShowTipWindow(false)}
                 className="px-2 bg-[#c0c0c0] text-black border border-black hover:bg-[#ddd] active:bg-[#aaa]"
@@ -1026,7 +1036,7 @@ const ViewFromWindowCard = () => {
         </div>
 
         <span className="text-[10px] sm:text-xs text-gray-600 select-none font-mono whitespace-nowrap">
-          delhi metro ✦ blue line
+          delhi metro ✦ I love my K-town
         </span>
       </div>
     </div>
