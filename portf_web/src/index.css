@@ -160,3 +160,9 @@ body::-webkit-scrollbar {
 .retro-scrollbar::-webkit-scrollbar-button:vertical:end:decrement {
   display: none;
 }
+
+/* Retro progress bar animation — pure CSS, zero JS repaints */
+@keyframes retro-progress {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}

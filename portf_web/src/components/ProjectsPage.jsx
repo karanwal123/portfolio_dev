@@ -6,6 +6,17 @@ const ProjectsPage = () => {
 
   const projects = [
     {
+      name: "Chanakya",
+      subtitle: "Agentic AI Copilot for Teachers",
+      description:
+        "Built a LangGraph-based multi-agent advisor with dynamic query routing across specialized agents and tool workflows. Developed RAG pipelines with FAISS and Redis-backed memory for contextual, low-latency responses. Engineered a microfrontend architecture and shipped 10+ product features targeting 150+ schools and organisations.",
+      github: "https://github.com/karanwal123",
+      color: "bg-[#CFEBDF]",
+      date: "03/01/26",
+      type: "ShikshaLokam · Production",
+      technologies: ["Agentic AI", "PostgreSQL", "FastAPI", "LangGraph", "React", "Redis"],
+    },
+    {
       name: "Plan-it",
       subtitle: "Personal Project",
       description:

@@ -36,6 +36,8 @@ import animatedPfp from "./assets/animated_pfp_carens.mp4";
 import BooksPage from "./components/BooksPage";
 import MediumArticlesPage from "./components/MediumArticlesPage";
 import lnm from "./assets/lnm.png";
+import shikshaLogo from "./assets/shiksha_retro.png";
+import delhiMetroVideo from "./assets/that_is_delhi_mertro_blue_lin_gwr_video_mvp.mp4";
 import { ExternalLink } from "lucide-react";
 
 // Main App Component with Routing Logic
@@ -314,7 +316,7 @@ const HomePage = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-6">
-        {/* Top Row: About Me & Work Experience */}
+        {/* Row 1: About Me & ShikshaLokam */}
         <div
           ref={cardRefs[0]}
           className="flex flex-col border-2 border-black bg-[#FFE7A0] p-3 lg:p-4"
@@ -331,9 +333,18 @@ const HomePage = () => {
           <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-4">
             Work experience
           </h2>
-          <WorkExperienceCard />
+          <ShikshaLokamCard />
         </div>
-        {/* Middle Row: Education */}
+
+        {/* Row 2: Travel Buddy & Education */}
+        <div
+          className="flex flex-col border-2 border-black bg-[#F8F8F8] p-3 lg:p-4"
+        >
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-4">
+            Previous experience
+          </h2>
+          <TravelBuddyCard />
+        </div>
         <div
           ref={cardRefs[2]}
           className="flex flex-col border-2 border-black bg-[#E8F4FD] p-3 lg:p-4"
@@ -343,6 +354,12 @@ const HomePage = () => {
           </h2>
           <EducationCard />
         </div>
+
+        {/* Cinematic Video Frame — full-width ambient strip */}
+        <div className="col-span-1 lg:col-span-2">
+          <ViewFromWindowCard />
+        </div>
+
         {/* Bottom Row: Tech Stack & Stats */}
         <div
           ref={cardRefs[3]}
@@ -600,7 +617,7 @@ const ProfileCard = () => {
             <p className="text-xs sm:text-sm mb-2">adityakaranwal@gmail.com</p>
 
             <p className="text-sm sm:text-base lg:text-lg leading-relaxed mb-4">
-              Hey there! I’m Aditya Karanwal, a 3rd-year CSE student who loves
+              Hey there! I’m Aditya Karanwal, a 4th-year CSE student who loves
               building projects and diving into hackathons that push creativity
               and problem-solving. I have a deep appreciation for typography and
               design, and I’m always drawn to things that blend tech with
@@ -632,13 +649,100 @@ const ProfileCard = () => {
     </>
   );
 };
-// Work Experience Card Component
-const WorkExperienceCard = () => {
+// Work Experience Card Components (split for grid layout)
+const ShikshaLokamCard = () => {
+  const [showSlLogoPopup, setShowSlLogoPopup] = useState(false);
+
+  return (
+    <>
+      {/* Popup Logo Window — ShikshaLokam */}
+      {showSlLogoPopup && (
+        <motion.div
+          drag
+          dragMomentum={false}
+          dragConstraints={{ left: -500, right: 500, top: -300, bottom: 300 }}
+          className="fixed top-1/2 left-1/2 z-50"
+          initial={{ scale: 0.8, opacity: 0, x: "-50%", y: "-50%" }}
+          animate={{ scale: 1, opacity: 1, x: "-50%", y: "-50%" }}
+          exit={{ scale: 0.8, opacity: 0 }}
+        >
+          <div className="w-72 sm:w-96 bg-[#c0c0c0] border-t-2 border-l-2 border-r-2 border-b-2 border-t-white border-l-white border-r-black border-b-black shadow-[4px_4px_0_0_#000]">
+            <div className="bg-[#000080] px-2 py-1 flex items-center justify-between text-white cursor-move">
+              <span className="text-xs">ShikshaLokam Logo</span>
+              <button
+                onClick={() => setShowSlLogoPopup(false)}
+                className="px-2 bg-[#c0c0c0] text-black border border-black hover:bg-[#ddd] active:bg-[#aaa]"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="flex items-center justify-center bg-white p-4">
+              <img
+                src={shikshaLogo}
+                alt="ShikshaLokam Logo Large"
+                className="w-52 h-52 sm:w-64 sm:h-64 object-contain"
+              />
+            </div>
+          </div>
+        </motion.div>
+      )}
+
+      <div className="border-2 border-black bg-[#F8F8F8] p-3 sm:p-4">
+        <div className="flex items-center gap-4 mb-4">
+          <div
+            className="w-16 h-16 border-2 border-black bg-white flex items-center justify-center flex-shrink-0 cursor-pointer hover:bg-gray-100 transition-colors"
+            onClick={() => setShowSlLogoPopup(true)}
+            onMouseEnter={() => setShowSlLogoPopup(true)}
+            onMouseLeave={() => setShowSlLogoPopup(false)}
+            tabIndex={0}
+            aria-label="Show ShikshaLokam Logo"
+          >
+            <img
+              src={shikshaLogo}
+              alt="ShikshaLokam Logo"
+              className="w-full h-full object-contain"
+            />
+          </div>
+          <div className="flex-1">
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-0.5">
+              Product Intern
+            </h3>
+            <p className="text-sm sm:text-base text-gray-600 mb-0.5">
+              ShikshaLokam
+            </p>
+            <p className="text-xs sm:text-sm text-gray-500 font-normal">
+              Mar - Aug 2026
+            </p>
+          </div>
+          <a
+            href="https://shikshalokam.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 hover:bg-gray-100 flex-shrink-0 inline-flex"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <ExternalLink size={18} />
+          </a>
+        </div>
+        <p className="text-sm sm:text-base leading-relaxed">
+          At ShikshaLokam, I got to own the frontend of Chanakya ~ an AI
+          classroom assistant reaching 150+ schools and teaching organisations.
+          I helped shape a production-grade AI advisor, wiring up LangGraph
+          orchestration and RAG-based retrieval under the hood. Over the course
+          of my internship, I shipped 10+ features end-to-end, working closely
+          with product and engineering across a microfrontend architecture.
+        </p>
+      </div>
+    </>
+  );
+};
+
+const TravelBuddyCard = () => {
   const [showLogoPopup, setShowLogoPopup] = useState(false);
 
   return (
     <>
-      {/* Popup Logo Window */}
+      {/* Popup Logo Window — Travel Buddy */}
       {showLogoPopup && (
         <motion.div
           drag
@@ -795,6 +899,140 @@ const EducationCard = () => {
   );
 };
 
+// View From Window — Cinematic Video Frame
+const ViewFromWindowCard = () => {
+  const videoRef = useRef(null);
+  const containerRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const userPausedRef = useRef(false);
+
+  // IntersectionObserver: lazy-load + auto-pause when off-screen
+  useEffect(() => {
+    const container = containerRef.current;
+    const video = videoRef.current;
+    if (!container || !video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Start loading video when near viewport
+          if (!hasLoaded) {
+            video.src = delhiMetroVideo;
+            video.load();
+            setHasLoaded(true);
+          }
+          // Auto-play only if user hasn't manually paused
+          if (!userPausedRef.current) {
+            video.play().then(() => setIsPlaying(true)).catch(() => {});
+          }
+        } else {
+          // Pause when scrolled away to save resources
+          if (!video.paused) {
+            video.pause();
+            setIsPlaying(false);
+          }
+        }
+      },
+      { rootMargin: "200px", threshold: 0.1 }
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [hasLoaded]);
+
+  const togglePlay = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (isPlaying) {
+      video.pause();
+      userPausedRef.current = true;
+      setIsPlaying(false);
+    } else {
+      video.play().then(() => {
+        userPausedRef.current = false;
+        setIsPlaying(true);
+      }).catch(() => {});
+    }
+  };
+
+  return (
+    <div ref={containerRef} className="border-2 border-black bg-[#c0c0c0] shadow-[4px_4px_0_0_#000]">
+      {/* Windows XP-style Title Bar */}
+      <div className="bg-[#000080] px-2 py-1 flex items-center justify-between text-white">
+        <div className="flex items-center gap-2">
+          <span className="text-xs">▶</span>
+          <span className="text-xs sm:text-sm select-none font-medium tracking-wide">
+            view_from_my_window.mp4
+          </span>
+        </div>
+        <div className="flex gap-1">
+          <button className="px-1.5 bg-[#c0c0c0] text-black border border-black hover:bg-[#ddd] active:bg-[#aaa] text-xs leading-none">
+            _
+          </button>
+          <button className="px-1.5 bg-[#c0c0c0] text-black border border-black hover:bg-[#ddd] active:bg-[#aaa] text-xs leading-none">
+            □
+          </button>
+          <button className="px-1.5 bg-[#c0c0c0] text-black border border-black hover:bg-[#ddd] active:bg-[#aaa] text-xs leading-none">
+            ✕
+          </button>
+        </div>
+      </div>
+
+      {/* Video Container */}
+      <div className="relative overflow-hidden bg-black">
+        <video
+          ref={videoRef}
+          className="w-full h-40 sm:h-52 lg:h-64 object-cover"
+          preload="none"
+          loop
+          muted
+          playsInline
+        />
+
+        {/* Combined VHS scanlines + vignette overlay (single DOM node) */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0,0,0,0.3) 1px, rgba(0,0,0,0.3) 2px)",
+            opacity: 0.06,
+            boxShadow: "inset 0 0 60px rgba(0,0,0,6.5)",
+          }}
+        />
+      </div>
+
+      {/* Retro Media Player Controls Bar */}
+      <div className="bg-[#c0c0c0] px-2 py-1.5 flex items-center gap-2 border-t border-[#808080]">
+        <button
+          onClick={togglePlay}
+          className="px-2 py-0.5 border-t border-l border-white border-r border-b border-r-[#808080] border-b-[#808080] bg-[#c0c0c0] hover:bg-[#d4d4d4] active:border-t-[#808080] active:border-l-[#808080] active:border-r-white active:border-b-white text-xs font-bold"
+        >
+          {isPlaying ? "⏸" : "▶"}
+        </button>
+        <button className="px-2 py-0.5 border-t border-l border-white border-r border-b border-r-[#808080] border-b-[#808080] bg-[#c0c0c0] hover:bg-[#d4d4d4] text-xs font-bold">
+          ⏹
+        </button>
+
+        {/* Progress bar — pure CSS animation, no JS repaints */}
+        <div className="flex-1 h-3 bg-[#000080] border border-[#808080] relative overflow-hidden">
+          <div
+            className="h-full bg-[#00ff00]"
+            style={{
+              animation: isPlaying ? "retro-progress 15s linear infinite" : "none",
+              width: isPlaying ? undefined : "0%",
+            }}
+          />
+        </div>
+
+        <span className="text-[10px] sm:text-xs text-gray-600 select-none font-mono whitespace-nowrap">
+          delhi metro ✦ blue line
+        </span>
+      </div>
+    </div>
+  );
+};
+
 // Animated Stat Counter Component
 const StatCounter = ({ label, value, suffix }) => {
   const [count, setCount] = useState(0);
@@ -874,6 +1112,22 @@ const HackathonsPage = () => {
         "Secured 4th Place with team in a hackathon organized by JK Lakshmipat University, Jaipur, competing against 180+ teams.",
       color: "bg-[#FFF3CD]",
       participants: "180+ teams",
+    },
+    {
+      name: "GO-BRICS India-Russia Energy-o-thon 2026",
+      achievement: "Semifinalist (Top 60)",
+      description:
+        "Reached the semifinals, finishing in the Top 60 out of 17,000+ participants in this international India-Russia energy innovation challenge.",
+      color: "bg-[#CFEBDF]",
+      participants: "17,000+ participants",
+    },
+    {
+      name: "AdventureX China",
+      achievement: "International Delegate",
+      description:
+        "Selected as an International Delegate with a travel subsidy awarded, representing India at AdventureX China.",
+      color: "bg-[#E8F4FD]",
+      participants: "International Event",
     },
   ];
 
