@@ -35,6 +35,7 @@ import carens_chopped from "./assets/carens_chopped.png";
 import animatedPfp from "./assets/animated_pfp_carens.mp4";
 import BooksPage from "./components/BooksPage";
 import MediumArticlesPage from "./components/MediumArticlesPage";
+import MusicPage from "./components/MusicPage";
 import lnm from "./assets/lnm.png";
 import shikshaLogo from "./assets/shiksha_retro.png";
 import delhiMetroVideo from "./assets/that_is_delhi_mertro_blue_lin_gwr_video_mvp.mp4";
@@ -135,6 +136,7 @@ const Sidebar = ({ currentRoute, navigate }) => {
     { label: "Designs", route: "/designs" },
     { label: "Books", route: "/books" },
     { label: "Articles", route: "/articles" },
+    { label: "Music", route: "/music" },
   ];
 
   const btnRefs = navItems.map(() => useRef(null));
@@ -242,6 +244,8 @@ const MainContent = ({ currentRoute }) => {
         return <BooksPage />;
       case "/articles":
         return <MediumArticlesPage />;
+      case "/music":
+        return <MusicPage />;
       default:
         return <HomePage />;
     }

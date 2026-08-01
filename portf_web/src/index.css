@@ -166,3 +166,37 @@ body::-webkit-scrollbar {
   0% { width: 0%; }
   100% { width: 100%; }
 }
+
+/* Spinning CD animation for the retro music player */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
+
+/* Hide Spotify embed notification bar — it renders outside our component */
+iframe[src*="spotify.com/embed"] {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Hide the Spotify SDK overlay bar */
+div[id*="spotify"],
+div[class*="spotify-embed"],
+.EmbedContainer {
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0,0,0,0) !important;
+}
