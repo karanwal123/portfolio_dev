@@ -997,7 +997,7 @@ const ViewFromWindowCard = () => {
       <div className="relative overflow-hidden bg-black">
         <video
           ref={videoRef}
-          className="w-full h-40 sm:h-52 lg:h-64 object-cover"
+          className="w-full h-40 sm:h-52 lg:h-[420px] object-cover object-center"
           preload="none"
           loop
           muted
